@@ -1,0 +1,41 @@
+{% extends "basic.html" %}
+
+{% block title %}
+	<header>
+		<span class="byline">Свяжитесь с нами</span>
+	</header>
+{% endblock %}
+
+{% block firstPost %}
+<form action = "/contact/" method = "POST" >				
+{% csrf_token %}
+
+	{% if form.subject.errors %}
+    	<ol>
+    	{% for error in form.subject.errors %}
+      	    <li><strong>{{ error|escape }}</strong></li>
+    	{% endfor %}
+    	</ol>
+	{% endif %}
+
+	<table>
+
+	{{form.as_table}}
+
+	</table>  
+
+    <input type="submit" class = "button" value="Отправить" />
+</form>
+
+{% endblock %}	
+
+{% block secondPost %}
+    {% for post in secondList %}
+    <div class="4u">
+		<h2> {{post.title}} </h2>
+		<a href="#" class="image full"><img src = "{{post.image.url}}" alt="" /></a>
+		<p> {{post.text}} </p>
+		<p><a href= {{post.link}} class="button"> {{post.buttonText}} </a></p>
+	</div>
+	{% endfor %}
+{% endblock %}

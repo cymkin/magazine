@@ -1,0 +1,44 @@
+{% extends "basic.html" %}
+
+{% block title %}
+	<header>
+		<span class="byline">Для заказа заполните форму ниже</span>
+	</header>
+{% endblock %}
+
+{% block firstPost %}
+<p> Поля, отмеченные *, обязательны для заполнения.</p>
+<form action = "/order2/" method = "POST" >				
+{% csrf_token %}
+
+	{% if form.subject.errors %}
+    	<ul class="errorlist">
+    	<ol>
+    	{% for error in form.subject.errors %}
+      	    <li><strong>{{ error|escape }}</strong></li>
+    	{% endfor %}
+    	</ol>
+    	</ul>
+	{% endif %}
+
+	<table>
+
+	{{form.as_table}}
+
+	</table>
+
+    <input type="submit" class = "button" value= "{{form.buttonName}}" />
+</form>
+
+{% endblock %}	
+
+{% block secondPost %}
+    {% for post in secondList %}
+    <div class="4u">
+		<h2> {{post.title}} </h2>
+		<a href="#" class="image full"><img src = "{{post.image.url}}" alt="" /></a>
+		<p> {{post.text}} </p>
+		<p><a href= {{post.link}} class="button"> {{post.buttonText}} </a></p>
+	</div>
+	{% endfor %}
+{% endblock %}

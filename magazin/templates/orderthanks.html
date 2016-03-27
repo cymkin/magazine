@@ -1,0 +1,22 @@
+{% extends "basic.html" %}
+{% load staticfiles %}
+
+{% block title %}
+	<h2>Лучший выбор для вас</h2>
+	<span class="byline">Доверьте нам Ваши зубы...</span>
+{% endblock %}
+
+{% block firstPost %}
+<p>Спасибо за заказ. В ближайшее время с Вами свяжется наш менеджер для подтверждения заказа.</p>
+{% endblock %}
+
+{% block secondPost %}
+    {% for post in secondList %}
+    <div class="4u">
+		<h2> {{post.title}} </h2>
+		<a href="#" class="image full"><img src = "{{post.image.url}}" alt="" /></a>
+		<p> {{post.text}} </p>
+		<p><a href= {{post.link}} class="button"> {{post.buttonText}} </a></p>
+	</div>
+	{% endfor %}
+{% endblock %}
